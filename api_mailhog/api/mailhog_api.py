@@ -1,11 +1,10 @@
-from sqlite3.dbapi2 import paramstyle
 
-import requests
 
-class MaihogAPI:
-    def __init__(self, host, headers=None):
-        self.host = host
-        self.headers = headers
+from restclient.client import RestClient
+
+
+class MaihogAPI(RestClient):
+
 
     def get_api_v2_messages(self, limit=50):
         """
@@ -16,8 +15,8 @@ class MaihogAPI:
         params = {
             'limit': limit
         }
-        response = requests.get(
-            url=f"{self.host}/api/v2/messages",
+        response = self.get(
+            path=f"/api/v2/messages",
             params = params
         )
         return response

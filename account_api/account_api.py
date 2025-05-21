@@ -1,22 +1,21 @@
-import requests
 
-class AccountAPI:
-    def __init__(self, host, headers):
-        self.host = host
-        self.headers = headers
+from restclient.client import RestClient
+
+
+class AccountAPI(RestClient):
 
     def register_new_user(self, login, email, password):
         """
-        Register new user
+        Register user
         :param login:
-        :param email
+        :param email:
         :param password:
         :return:
         """
 
-        response = requests.post(
+        response = self.post(
             headers=self.headers,
-            url=f"{self.host}/v1/account",
+            path=f"/v1/account",
             json={
                 "login": f"{login}",
                 "email": f"{email}",
@@ -34,8 +33,8 @@ class AccountAPI:
         headers = {
             "accept": "text/plain",
         }
-        response = requests.put(
-            url=f"{self.host}/v1/account/{token}",
+        response = self.put(
+            path=f"/v1/account/{token}",
             headers=headers
         )
         return response
@@ -46,8 +45,8 @@ class AccountAPI:
             "password": f"{password}",
             "email": f"{new_email}"
 }
-        response = requests.put(
-            url=f"{self.host}/v1/account/email",
+        response = self.put(
+            path=f"/v1/account/email",
             json = data
         )
         return response
