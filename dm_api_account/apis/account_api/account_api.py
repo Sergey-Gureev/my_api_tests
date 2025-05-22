@@ -4,7 +4,7 @@ from restclient.client import RestClient
 
 class AccountAPI(RestClient):
 
-    def register_new_user(self, login, email, password):
+    def post_v1_account(self, login, email, password):
         """
         Register user
         :param login:
@@ -24,7 +24,7 @@ class AccountAPI(RestClient):
         )
         return response
 
-    def activate_registered_user(self, token):
+    def put_v1_account_token(self, token):
         """
         Activate registered user
         :param token:
@@ -39,7 +39,14 @@ class AccountAPI(RestClient):
         )
         return response
 
-    def change_registered_user_email(self,login, password, new_email):
+    def put_v1_account_email(self, login, password, new_email):
+        """
+        Change registered user email
+        :param login:
+        :param password:
+        :param new_email:
+        :return:
+        """
         data = {
             "login": f"{login}",
             "password": f"{password}",
