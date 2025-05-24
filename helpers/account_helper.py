@@ -26,7 +26,7 @@ def retrier(function):
 class AccountHelper:
     def __init__(self, dm_account_api: DMApiAccount, mailhog: MaiHogApi):
         self.dm_account_api = dm_account_api
-        self.maihog = mailhog
+        self.mailhog = mailhog
 
     def register_new_user(self, login:str, password: str, email:str):
 
@@ -46,14 +46,22 @@ class AccountHelper:
     @retry(stop_max_attempt_number=5, retry_on_result=retry_if_result_none, wait_fixed=1000)
     def get_activation_token_by_login(self, login):
         token = None
-        mailhog_response = self.maihog.mail_api.get_api_v2_messages()
+        mailhog_response = self.mailhog.mail_api.get_api_v2_messages()
         if mailhog_response.status_code == 200:
             for item in mailhog_response.json()['items']:
-                if json.loads(item['Content']['Body'])['Login']+"1" == login:
+                if json.loads(item['Content']['Body'])['Login'] == login:
                     token = json.loads(item['Content']['Body'])['ConfirmationLinkUrl'].split('/')[-1]
                     break
         return token
         # assert token is not None, 'there is no email with your token'
+    def change_email(self, login, password, new_email):
+        self.dm_account_api.account_api.put_v1_account_email(
+            login=login,
+            password=password,
+            new_email=new_email
+        )
+        token = self.get_activation_token_by_login(login=login)
+        self.dm_account_api.account_api.put_v1_account_token(token=token)
 
-
+        self.user_login(login=login, password=password)
 
