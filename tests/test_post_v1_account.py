@@ -21,7 +21,7 @@ structlog.configure(
 
 def test_post_v1_account():
 
-    login = "test.testovichev.14"
+    login = "test.testovichev.21"
     password = '123456789'
     email = f"{login}@mail.ru"
     mailhog_configuration = MaihogConfiguration(host='http://5.63.153.31:5025',disable_log=True)
