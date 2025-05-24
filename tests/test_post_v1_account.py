@@ -1,7 +1,7 @@
 import json
 
 import structlog.processors
-
+from helpers.account_helper import AccountHelper
 from restclient.configuration import Configuration as MaihogConfiguration
 from restclient.configuration import Configuration as DMmApiConfiguration
 
@@ -21,7 +21,7 @@ structlog.configure(
 
 def test_post_v1_account():
 
-    login = "test.testovichev.11"
+    login = "test.testovichev.14"
     password = '123456789'
     email = f"{login}@mail.ru"
     mailhog_configuration = MaihogConfiguration(host='http://5.63.153.31:5025',disable_log=True)
@@ -29,29 +29,20 @@ def test_post_v1_account():
 
     account = DMApiAccount(configuration=dm_api_configuration)
     mailapi = MaiHogApi(configuration=mailhog_configuration)
+    account_helper =   AccountHelper(dm_account_api=account, mailhog=mailapi)
 
-    print("\nregistering new account")
-    register_response = account.account_api.post_v1_account(login=login, email=email, password=password)
-    assert register_response.status_code in [200, 201]
+    account_helper.register_new_user(login=login,password=password,email=email)
+    account_helper.user_login(login=login,password=password)
 
-    print('\ngetting token...1st')
-    emails = mailapi.mail_api.get_api_v2_messages()
-    token = None
-    if emails.status_code == 200:
-        for item in emails.json()['items']:
-            if json.loads(item['Content']['Body'])['Login']  == login:
-                token = json.loads(item['Content']['Body'])['ConfirmationLinkUrl'].split('/')[-1]
-                break
-    assert token is not None, 'there is no email with your token'
+def test_change_email():
+    login = "test.testovichev.13"
+    password = '123456789'
+    email = f"{login}@mail.ru"
+    mailhog_configuration = MaihogConfiguration(host='http://5.63.153.31:5025', disable_log=True)
+    dm_api_configuration = DMmApiConfiguration(host='http://5.63.153.31:5051', disable_log=False)
 
-    print('Activating...')
-    resp = account.account_api.put_v1_account_token(token)
-    assert resp.json()['resource']['rating']['enabled'] == True, "user not activated"
-
-    login_result = account.login_api.login(login=login, password=password)
-    print("login with activated user", login_result.text)
-    assert login_result.status_code == 200
-
+    account = DMApiAccount(configuration=dm_api_configuration)
+    mailapi = MaiHogApi(configuration=mailhog_configuration)
     # changing the email
     new_email = f"changed.{email}"
     response = account.account_api.put_v1_account_email(
@@ -63,7 +54,7 @@ def test_post_v1_account():
     print('new email response: ', response.json())
 
     # try login again. Expecting error
-    login_result_attempt_2 = account.login_api.login(login=login, password=password)
+    login_result_attempt_2 = account.login_api.post_v1_account_login(login=login, password=password)
     print("login with CHANGED user", login_result_attempt_2.text)
     assert login_result_attempt_2.status_code != 200
 
@@ -88,6 +79,6 @@ def test_post_v1_account():
     assert resp.json()['resource']['rating']['enabled'] == True, "user not activated"
 
     #login again with edited  activated account
-    login_result = account.login_api.login(login=login, password=password)
+    login_result = account.login_api.post_v1_account_login(login=login, password=password)
     print("\nlogin with CHANGED activated user", login_result.text)
     assert login_result.status_code == 200
