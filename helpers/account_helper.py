@@ -36,7 +36,7 @@ class AccountHelper:
 
         response = self.dm_account_api.login_api.post_v1_account_login(json_data)
         x_dm_auth_token = {
-            "X-Dm-Auth-Token": f"{response.headers["x-dm-auth-token"]}"
+            "X-Dm-Auth-Token": f'{response.headers["x-dm-auth-token"]}'
         }
         self.dm_account_api.account_api.set_headers(x_dm_auth_token)
         self.dm_account_api.login_api.set_headers(x_dm_auth_token)
