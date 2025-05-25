@@ -2,16 +2,23 @@
 from restclient.client import RestClient
 
 
-class Login_API(RestClient):
+class LoginAPI(RestClient):
 
+    def delete_v1_account_login(self):
+        self.delete(path='/v1/account/login')
 
-    def post_v1_account_login(self, login:str, password:str, remember_me=True):
+    def delete_v1_account_login_all(self):
+        self.delete(path='/v1/account/login/all')
+
+    def post_v1_account_login(self, json_data):
+        """
+        Authenticate via credentials
+        :param json_data: login, password, remember_me
+        :return:
+        """
         response = self.post(
             path=  '/v1/account/login',
-            json = {
-                "login": f"{login}",
-                "password": f"{password}",
-                "rememberMe": remember_me
-            }
+            json = json_data
         )
         return response
+

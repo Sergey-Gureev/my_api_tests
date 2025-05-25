@@ -11,9 +11,9 @@ from restclient.configuration import Configuration
 class RestClient:
     def __init__(self, configuration: Configuration):
         self.host = configuration.host
-        self.headers = configuration.headers
-        self.disable_log = configuration.disable_log
         self.session = session()
+        self.set_headers(configuration.headers)
+        self.disable_log = configuration.disable_log
         self.log = structlog.get_logger(__name__).bind(service='api')
 
     def get(self, path, **kwargs):
@@ -27,6 +27,10 @@ class RestClient:
 
     def delete(self, path, **kwargs):
         return self._send_request(method="DELETE", path=path, **kwargs)
+
+    def set_headers(self, headers):
+        if headers:
+            self.session.headers.update(headers)
 
     def _send_request(self, method, path, **kwargs):
         log = self.log.bind(event_id=str(uuid.uuid4()))
@@ -45,11 +49,11 @@ class RestClient:
         )
 
         rest_response = self.session.request(method=method,url=full_url,**kwargs)
-        curl=curlify.to_curl((rest_response.request))
+        curl=curlify.to_curl(rest_response.request)
         print(curl)
         log.msg(
-            event="Response",
             status_code=rest_response.status_code,
+            event="Response",
             headers=rest_response.headers,
             json=self._get_json(rest_response)
 
