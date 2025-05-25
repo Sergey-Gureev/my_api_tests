@@ -1,4 +1,3 @@
-from conftest import auth_account_helper
 
 # TODO 2. Напишите следующие тесты:
 # 2.1 в файле get_v1_account.py
