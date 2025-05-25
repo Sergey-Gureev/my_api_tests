@@ -65,7 +65,7 @@ class AccountHelper:
         mailhog_response = self.mailhog.mail_api.get_api_v2_messages()
         if mailhog_response.status_code == 200:
             for item in mailhog_response.json()['items']:
-                subject = f"{item['Content']["Headers"]['Subject'][0]}"
+                subject = f"{item['Content']['Headers']['Subject'][0]}"
                 result = decode_header(subject)
                 txt, encoding = result
                 subject = txt[0].decode(txt[1])
