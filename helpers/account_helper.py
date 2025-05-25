@@ -32,9 +32,6 @@ class AccountHelper:
         self.mailhog = mailhog
         self.token=None
 
-    def get_token_from_email_for_restore_password(self):
-        ...
-
     def auth_client(self, json_data ):
 
         response = self.dm_account_api.login_api.post_v1_account_login(json_data)
