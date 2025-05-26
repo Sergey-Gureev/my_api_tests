@@ -8,7 +8,6 @@ class AccountAPI(RestClient):
         """
         get user
         """
-
         response = self.get(
             headers=self.session.headers,
             path=f"/v1/account",
@@ -17,20 +16,25 @@ class AccountAPI(RestClient):
         return response
 
 
-    def post_v1_account(self, json_data):
+    def post_v1_account(self, login, email, password, **kwargs):
         """
         Register user
         :param json_data: should contain login, email, password:
         :return: api response
         """
+
         response = self.post(
-            headers=self.session.headers,
             path=f"/v1/account",
-            json=json_data
+            json= {
+                "login": login,
+                "password": password,
+                "email": email
+            },
+            **kwargs
         )
         return response
 
-    def put_v1_account_token(self, token):
+    def put_v1_account_token(self, token, **kwargs):
         """
         Activate registered user
         :param token:
@@ -41,51 +45,50 @@ class AccountAPI(RestClient):
         }
         response = self.put(
             path=f"/v1/account/{token}",
-            headers=headers
+            headers=headers,
+            **kwargs
         )
         return response
 
-    def put_v1_account_email(self, json_data):
+    def put_v1_account_email(self, login, password, new_email, **kwargs):
         """
         Change registered user email
-        :param json_data should include login, password, new_email
+        :param login, password, new_email
         :return: response
         """
         response = self.put(
             path=f"/v1/account/email",
-            json = json_data
+            json = {
+                "login": login,
+                "password": password,
+                "new_email": new_email
+            },
+            **kwargs
         )
         return response
 
-    def put_v1_account_password(self, login, password, new_password, token):
+    def put_v1_account_password(self,json_data, **kwargs):
         """
         Change registered user password
-        :param login:
-        :param password:
-        :param new_password:
-        :param token: registered user token
+        :param json_data: login,  password, new_password,token: registered user token
         :return:
         """
-        data = {
-            "login": f"{login}",
-            "token": f"{token}",
-            "oldPassword": f"{password}",
-            "newPassword": f"{new_password}"
-        }
         response = self.put(
             path=f"/v1/account/password",
-            json=data,
-            headers=self.session.headers,
+            json=json_data,
+            # headers=self.session.headers,
+            **kwargs
         )
         return response
 
-    def post_v1_account_password(self, json_data):
+    def post_v1_account_password(self, json_data, **kwargs):
         """
         Reset registered user password -> should receive confirmation email
         :return:
         """
-        self.post(
+        response = self.post(
             path='/v1/account/password',
             json=json_data,
-
+            **kwargs
         )
+        return response
