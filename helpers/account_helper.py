@@ -42,16 +42,14 @@ class AccountHelper:
         self.dm_account_api.login_api.set_headers(x_dm_auth_token)
 
 
-    def register_and_activate_new_user(self, json_data):
-        register_response = self.dm_account_api.account_api.post_v1_account(json_data=json_data)
-        print(register_response)
+    def register_and_activate_new_user(self, login, email, password):
+        register_response = self.dm_account_api.account_api.post_v1_account(login=login, email=email, password=password)
         assert register_response.status_code in [200, 201]
 
-        self.token = self.get_activation_token_by_login(login=json_data['login'])
-        print("token registered: ",self.token)
-        assert self.token is not None, 'there is no email with your token'
+        token = self.get_activation_token_by_login(login=login)
+        assert token is not None, 'there is no email with your token'
 
-        response = self.dm_account_api.account_api.put_v1_account_token(token=self.token)
+        response = self.dm_account_api.account_api.put_v1_account_token(token=token)
         assert response.json()['resource']['rating']['enabled'] == True, "user not activated"
 
         return response
@@ -79,9 +77,9 @@ class AccountHelper:
         return token
         # assert token is not None, 'there is no email with your token'
 
-    def change_email(self, json_data):
-        self.dm_account_api.account_api.put_v1_account_email(json_data)
-        token = self.get_activation_token_by_login(login=json_data['login'])
+    def change_email(self, login, password, new_email):
+        self.dm_account_api.account_api.put_v1_account_email(login=login,password=password, new_email=new_email)
+        token = self.get_activation_token_by_login(login=login)
         self.dm_account_api.account_api.put_v1_account_token(token=token)
 
     def change_password(self,login,email, password, new_password):
@@ -101,21 +99,11 @@ class AccountHelper:
         token = self.get_activation_token_by_login(login=login, restore_password=True)
         print("token for restore password: "+token)
         print("\n let's change password: ... ")
-        self.dm_account_api.account_api.put_v1_account_password(
-            login=login,
-            password=password,
-            new_password=new_password,
-            token=token
-        )
-        json_data = {
-            "login": login,
-            "password": new_password,
-        }
-        self.auth_client(json_data=json_data)
-        # assert response.json()['resource']['rating']['enabled'] == True, "user not activated"
+        json_data.update({"token":token})
+        self.dm_account_api.account_api.put_v1_account_password(json_data=json_data)
 
-    def delete_auth_user(self, all_devices=False):
+    def delete_auth_user(self, all_devices=False, **kwargs):
         if all_devices:
-            self.dm_account_api.login_api.delete_v1_account_login_all()
+            self.dm_account_api.login_api.delete_v1_account_login_all(**kwargs)
             return
         self.dm_account_api.login_api.delete_v1_account_login()

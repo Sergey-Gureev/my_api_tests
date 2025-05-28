@@ -5,10 +5,12 @@ from restclient.client import RestClient
 class LoginAPI(RestClient):
 
     def delete_v1_account_login(self):
-        self.delete(path='/v1/account/login')
+        response = self.delete(path='/v1/account/login')
+        return response
 
-    def delete_v1_account_login_all(self):
-        self.delete(path='/v1/account/login/all')
+    def delete_v1_account_login_all(self, **kwargs):
+        response = self.delete(path='/v1/account/login/all',**kwargs)
+        return response
 
     def post_v1_account_login(self, json_data):
         """

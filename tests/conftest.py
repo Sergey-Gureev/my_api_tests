@@ -9,6 +9,19 @@ from restclient.configuration import Configuration as DMmApiConfiguration
 from services.api_mailhog import MaiHogApi
 from services.dm_api_account import DMApiAccount
 
+import structlog.processors
+
+
+structlog.configure(
+    processors=[
+        structlog.processors.JSONRenderer(
+            indent=4,
+            ensure_ascii=True,
+            sort_keys=True
+        )
+    ]
+)
+
 @pytest.fixture
 def mailhog():
     mailhog_configuration = MaihogConfiguration(host='http://5.63.153.31:5025',disable_log=True)
@@ -27,13 +40,21 @@ def account_helper(account, mailhog):
     return account_helper
 
 @pytest.fixture
-def auth_account_helper(mailhog):
+def registered_user(account_helper, prepared_user):
+    login = prepared_user.login
+    password = prepared_user.password
+    email = prepared_user.email
+    account_helper.register_and_activate_new_user(login=login,password=password,email=email)
+    return prepared_user
+
+@pytest.fixture
+def auth_account_helper(mailhog, registered_user):
     dm_api_configuration = DMmApiConfiguration(host='http://5.63.153.31:5051', disable_log=False)
     account_api = DMApiAccount(configuration=dm_api_configuration)
     account_helper = AccountHelper(dm_account_api=account_api, mailhog=mailhog)
     json_data = {
-        "login":  f"test.testovichev.{3}",
-        "password":  '123456789'
+        "login":  registered_user.login,
+        "password":  registered_user.password
     }
     account_helper.auth_client(json_data=json_data)
     return account_helper
