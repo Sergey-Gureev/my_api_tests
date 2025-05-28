@@ -3,7 +3,7 @@
 from restclient.client import RestClient
 
 
-class MaihogAPI(RestClient):
+class MailhogAPI(RestClient):
 
 
     def get_api_v2_messages(self, limit=50):
