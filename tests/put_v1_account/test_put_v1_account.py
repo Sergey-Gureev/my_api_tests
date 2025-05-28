@@ -8,12 +8,14 @@
 
 
 def test_change_user_password(account_helper, prepared_user):
-    account_helper.register_and_activate_new_user(
-        login=prepared_user.login,
-        email=prepared_user.email,
-        password=prepared_user.password
+    account_helper.register_new_user(
+        json_data={
+            "login" : prepared_user.login,
+            "email" : prepared_user.email,
+            "password" : prepared_user.password
+        }
     )
-
+    account_helper.activate_registered_user(login=prepared_user.login)
     account_helper.change_password(
         login=prepared_user.login,
         password=prepared_user.password,

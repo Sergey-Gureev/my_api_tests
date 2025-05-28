@@ -16,20 +16,17 @@ class AccountAPI(RestClient):
         return response
 
 
-    def post_v1_account(self, login, email, password, **kwargs):
+    def post_v1_account(self, json_data, **kwargs):
         """
         Register user
-        :param json_data: should contain login, email, password:
-        :return: api response
+        :param login:
+        :param email:
+        :param password:
+        :return:  api response
         """
-
         response = self.post(
             path=f"/v1/account",
-            json= {
-                "login": login,
-                "password": password,
-                "email": email
-            },
+            json= json_data,
             **kwargs
         )
         return response
@@ -52,9 +49,11 @@ class AccountAPI(RestClient):
 
     def put_v1_account_email(self, login, password, new_email, **kwargs):
         """
-        Change registered user email
-        :param login, password, new_email
-        :return: response
+        Change registered user email to a new email
+        :param login:
+        :param new_email:
+        :param password:
+        :return:  response
         """
         response = self.put(
             path=f"/v1/account/email",
@@ -76,7 +75,6 @@ class AccountAPI(RestClient):
         response = self.put(
             path=f"/v1/account/password",
             json=json_data,
-            # headers=self.session.headers,
             **kwargs
         )
         return response
@@ -84,6 +82,7 @@ class AccountAPI(RestClient):
     def post_v1_account_password(self, json_data, **kwargs):
         """
         Reset registered user password -> should receive confirmation email
+            :param json_data: login, email
         :return:
         """
         response = self.post(

@@ -42,10 +42,11 @@ class AccountHelper:
         self.dm_account_api.login_api.set_headers(x_dm_auth_token)
 
 
-    def register_and_activate_new_user(self, login, email, password):
-        register_response = self.dm_account_api.account_api.post_v1_account(login=login, email=email, password=password)
+    def register_new_user(self, json_data):
+        register_response = self.dm_account_api.account_api.post_v1_account(json_data)
         assert register_response.status_code in [200, 201]
 
+    def activate_registered_user(self,login):
         token = self.get_activation_token_by_login(login=login)
         assert token is not None, 'there is no email with your token'
 

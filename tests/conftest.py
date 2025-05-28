@@ -44,7 +44,8 @@ def registered_user(account_helper, prepared_user):
     login = prepared_user.login
     password = prepared_user.password
     email = prepared_user.email
-    account_helper.register_and_activate_new_user(login=login,password=password,email=email)
+    account_helper.register_new_user(json_data={"login":login,"password":password,"email":email})
+    account_helper.activate_registered_user(login=login)
     return prepared_user
 
 @pytest.fixture
