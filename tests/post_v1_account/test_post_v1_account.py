@@ -1,12 +1,15 @@
-import json
+import hamcrest
+from hamcrest import assert_that, has_property, equal_to, has_items, contains
+
+from dm_api_account.models.user_envelope import UserRole
 
 
-
-def test_post_v1_account(account_helper, prepared_user):
-    json_data = {
-        "login": prepared_user.login,
-        "password": prepared_user.password,
-        "email": prepared_user.email
-    }
-    account_helper.user_login(json_data=json_data)
-
+def test_post_v1_account(registered_user, account_helper):
+    response = account_helper.user_login(
+        login=registered_user.login,
+        password=registered_user.password,
+        remember_me= True,
+        return_model=True)
+    print(response)
+    assert_that(response, has_property("resource", has_property("login", equal_to(registered_user.login))))
+    assert_that(response.resource.roles, has_items(UserRole.GUEST, UserRole.PLAYER))

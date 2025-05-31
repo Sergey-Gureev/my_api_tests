@@ -1,10 +1,14 @@
+import time
 from collections import namedtuple
 from datetime import datetime
 
 import pytest
+from schemathesis.stateful.validation import validate_response
 
+from dm_api_account.models.login_credentials import LoginCredentials
+from dm_api_account.models.registration import Registration
 from helpers.account_helper import AccountHelper
-from restclient.configuration import Configuration as MaihogConfiguration
+from restclient.configuration import Configuration as MailhogConfiguration
 from restclient.configuration import Configuration as DMmApiConfiguration
 from services.api_mailhog import MaiHogApi
 from services.dm_api_account import DMApiAccount
@@ -24,7 +28,7 @@ structlog.configure(
 
 @pytest.fixture
 def mailhog():
-    mailhog_configuration = MaihogConfiguration(host='http://5.63.153.31:5025',disable_log=True)
+    mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025', disable_log=True)
     mail_api = MaiHogApi(configuration=mailhog_configuration)
     return mail_api
 
@@ -44,23 +48,19 @@ def registered_user(account_helper, prepared_user):
     login = prepared_user.login
     password = prepared_user.password
     email = prepared_user.email
-    account_helper.register_new_user(json_data={"login":login,"password":password,"email":email})
+    account_helper.register_new_user(registration=Registration(login=login,password=password,email=email))
     account_helper.activate_registered_user(login=login)
     return prepared_user
 
 @pytest.fixture
-def auth_account_helper(mailhog, registered_user):
-    dm_api_configuration = DMmApiConfiguration(host='http://5.63.153.31:5051', disable_log=False)
-    account_api = DMApiAccount(configuration=dm_api_configuration)
-    account_helper = AccountHelper(dm_account_api=account_api, mailhog=mailhog)
-    json_data = {
-        "login":  registered_user.login,
-        "password":  registered_user.password
-    }
-    account_helper.auth_client(json_data=json_data)
+def auth_account_helper(account_helper, registered_user):
+    account_helper.auth_client(login=registered_user.login,
+                               password=registered_user.password,
+                               remember_me=True,
+                               return_model=False)
     return account_helper
 
-@pytest.fixture(
+@pytest.fixture(  #function, module, session, class
     scope="function"
 )
 def prepared_user():

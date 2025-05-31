@@ -7,18 +7,12 @@
 #         - Смена пароля с пробросом авторизационного токена в хэдэры и указанием токена для сброса
 
 
-def test_change_user_password(account_helper, prepared_user):
-    account_helper.register_new_user(
-        json_data={
-            "login" : prepared_user.login,
-            "email" : prepared_user.email,
-            "password" : prepared_user.password
-        }
-    )
-    account_helper.activate_registered_user(login=prepared_user.login)
+def test_change_user_password(account_helper, registered_user):
+
+    account_helper.activate_registered_user(login=registered_user.login)
     account_helper.change_password(
-        login=prepared_user.login,
-        password=prepared_user.password,
-        email=prepared_user.email,
-        new_password=f"changed_{prepared_user.password}"
+        login=registered_user.login,
+        password=registered_user.password,
+        email=registered_user.email,
+        new_password=f"changed_{registered_user.password}"
     )
