@@ -1,6 +1,7 @@
 from datetime import datetime
 from assertpy import assert_that, soft_assertions
-from checkers import check_status_code_http
+
+from checkers.checkers import check_status_code_http
 from dm_api_account.models.user_envelope import UserRole
 
 
