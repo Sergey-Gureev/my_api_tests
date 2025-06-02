@@ -5,6 +5,7 @@ from email.header import decode_header
 
 from dm_api_account.models.change_registered_user_email import ChangeUserEmail
 from dm_api_account.models.login_credentials import LoginCredentials
+from dm_api_account.models.registration import Registration
 from dm_api_account.models.reset_user_passwrord import ResetUserPassword, ChangeUserPassword
 from services.dm_api_account import DMApiAccount
 from services.api_mailhog import MaiHogApi
@@ -44,8 +45,13 @@ class AccountHelper:
         self.dm_account_api.account_api.set_headers(x_dm_auth_token)
         self.dm_account_api.login_api.set_headers(x_dm_auth_token)
 
-    def register_new_user(self, registration):
-        register_response = self.dm_account_api.account_api.post_v1_account(registration)
+    def register_new_user(self, login, email, password):
+        registration_initialized_object = Registration(
+            login=login,
+            email=email,
+            password=password
+        )
+        register_response = self.dm_account_api.account_api.post_v1_account(registration_initialized_object)
         # assert register_response.status_code in [200, 201]
         return register_response
 
@@ -105,13 +111,13 @@ class AccountHelper:
         assert response.status_code == 200, "email has not been changed"
 
     def change_password(self,login,email, password, new_password):
-        # activating registered user
+        # initialize pydandic model user_reset_password
         user_reset_password = ResetUserPassword(
             login = login,
             email = email
         )
-        print("let's authenticate")
-        self.auth_client(login=login, password=password, remember_me=True)
+        # print("let's authenticate")
+        # self.auth_client(login=login, password=password, remember_me=True)
 
         print("let's request token for restore password")
         response = self.dm_account_api.account_api.post_v1_account_password(user_reset_password=user_reset_password, validate_response=True)

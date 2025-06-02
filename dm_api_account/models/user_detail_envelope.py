@@ -1,10 +1,20 @@
 
 from __future__ import annotations
 
+from datetime import datetime
+from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
+
+class UserRole(str, Enum):
+    GUEST = "Guest"
+    PLAYER = "Player"
+    ADMINISTRATOR = "Administrator"
+    NANNY_MODERATOR = "NannyModerator"
+    REGULAR_MODERATOR = "RegularModerator"
+    SENIOR_MODERATOR = "SeniorModerator"
 
 class Rating(BaseModel):
     enabled: bool
@@ -33,12 +43,12 @@ class Settings(BaseModel):
 
 class Resource(BaseModel):
     login: str
-    roles: List[str]
+    roles: list[UserRole]
     medium_picture_url: str = Field(None, alias='mediumPictureUrl')
     small_picture_url: str = Field(None, alias='smallPictureUrl')
     status: str = Field(None, alias="status")
     rating: Rating
-    online: str
+    online: datetime = Field(None, alias="online")
     name: str = Field(None, alias="name")
     location: str = Field(None, alias="location")
     registration: str
