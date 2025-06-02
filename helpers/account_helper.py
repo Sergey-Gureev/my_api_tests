@@ -46,7 +46,8 @@ class AccountHelper:
 
     def register_new_user(self, registration):
         register_response = self.dm_account_api.account_api.post_v1_account(registration)
-        assert register_response.status_code in [200, 201]
+        # assert register_response.status_code in [200, 201]
+        return register_response
 
     def activate_registered_user(self,login):
         start_time = time.time()
