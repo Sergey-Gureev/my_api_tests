@@ -6,7 +6,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, ConfigDict
 
 
-class UserRole(Enum):
+class UserRole(str, Enum):
     GUEST = "Guest"
     PLAYER = "Player"
     ADMINISTRATOR = "Administrator"
@@ -41,7 +41,7 @@ class Settings(BaseModel):
 
 class User(BaseModel):
     login: str
-    roles: List[UserRole]
+    roles: list[UserRole]
     medium_picture_url: str = Field(None, alias='mediumPictureUrl')
     small_picture_url: str = Field(None, alias='smallPictureUrl')
     status: str = Field(None, alias='status')
