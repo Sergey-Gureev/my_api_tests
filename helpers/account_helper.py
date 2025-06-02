@@ -36,7 +36,7 @@ class AccountHelper:
         self.mailhog = mailhog
         self.token=None
 
-    def auth_client(self, login, password, remember_me, return_model=False ):
+    def auth_client(self, login, password, remember_me=True, return_model=False ):
         response = self.user_login(login, password, remember_me, return_model=return_model)
         assert response.headers.get("x-dm-auth-token"), 'x-dm-auth-token were not returned'
         x_dm_auth_token = {
@@ -116,16 +116,11 @@ class AccountHelper:
             login = login,
             email = email
         )
-        # print("let's authenticate")
-        # self.auth_client(login=login, password=password, remember_me=True)
-
-        print("let's request token for restore password")
         response = self.dm_account_api.account_api.post_v1_account_password(user_reset_password=user_reset_password, validate_response=True)
         assert response.resource.login
         #get token/confirmation for reset password from email:
         token = self.get_activation_token_by_login(login=login, restore_password=True)
-        print("token for restore password: "+token)
-        print("\n let's change password: ... ")
+
         user_change_password= ChangeUserPassword(
             login=login,
             token=token,

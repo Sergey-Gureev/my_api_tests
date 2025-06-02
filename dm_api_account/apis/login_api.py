@@ -17,7 +17,7 @@ class LoginAPI(RestClient):
         """
         Authenticate via credentials
         :param login_credentials: login, password, remember_me
-        :param validate_response: pydantic validation
+        :param return_model: pydantic validation flag -> if true return User object
         :return:
         """
         response = self.post(
