@@ -1,7 +1,10 @@
 import requests
-from hamcrest import assert_that, has_property, contains_string, has_items
+# from hamcrest import assert_that, has_property, contains_string, has_items
 from requests.exceptions import HTTPError
 from contextlib import contextmanager
+from assertpy import assert_that, soft_assertions
+
+
 @contextmanager
 def check_status_code_http(expected_status_code: requests.codes, expected_message: str = ""):
     try:
