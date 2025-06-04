@@ -84,7 +84,8 @@ def prepared_user():
     now = datetime.now()
     # date = now.strftime("%d_%m_%Y_%H_%M_%S")
     date = int(now.timestamp())
-    login = f"{v.get("user.login")}+{date}"
+    _login = v.get("user.login")
+    login = f"{_login}+{date}"
     password = v.get("user.password")
     email = f"{login}@mail.ru"
     User = namedtuple("user", ["login", "password", "email"])
