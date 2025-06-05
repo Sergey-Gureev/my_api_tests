@@ -50,7 +50,6 @@ class RestClient:
         )
 
         rest_response = self.session.request(method=method,url=full_url,**kwargs)
-        rest_response.raise_for_status()
         curl=curlify.to_curl(rest_response.request)
         print(curl)
         log.msg(
@@ -60,6 +59,7 @@ class RestClient:
             json=self._get_json(rest_response)
 
         )
+        rest_response.raise_for_status()
         return rest_response
 
     def _get_json(self, rest_response):
