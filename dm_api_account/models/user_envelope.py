@@ -49,7 +49,7 @@ class User(BaseModel):
     online: datetime = Field(None, alias="online")
     name: str = Field(None, alias="name")
     location: str = Field(None, alias="location")
-    registration: datetime = Field(None, alias="datetime")
+    registration: datetime = Field(None, alias="registration")
     icq: str = Field(None, alias="icq")
     skype: str = Field(None, alias="skype")
     original_picture_url: str = Field(None, alias='originalPictureUrl')
