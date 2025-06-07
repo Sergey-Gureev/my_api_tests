@@ -1,0 +1,14 @@
+{
+    "resource": {
+        "login": "sgureev+1749308008",
+        "roles": [
+            "Guest",
+            "Player"
+        ],
+        "rating": {
+            "enabled": true,
+            "quality": 0,
+            "quantity": 0
+        }
+    }
+}

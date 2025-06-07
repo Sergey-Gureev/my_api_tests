@@ -1,0 +1,15 @@
+{
+    "resource": {
+        "login": "sgureev+1749308006",
+        "roles": [
+            "Guest",
+            "Player"
+        ],
+        "rating": {
+            "enabled": true,
+            "quality": 0,
+            "quantity": 0
+        },
+        "online": "2025-06-07T14:53:28.170293+00:00"
+    }
+}
