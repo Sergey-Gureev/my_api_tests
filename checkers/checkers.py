@@ -1,9 +1,11 @@
+import allure
 import requests
 from requests import HTTPError
 
 from contextlib import contextmanager
 
 @contextmanager
+@allure.step('check response status code')
 def check_status_code_http(expected_status_code: requests.codes, expected_message: str = ""):
     try:
         yield

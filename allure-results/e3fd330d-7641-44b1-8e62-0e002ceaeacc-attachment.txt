@@ -1,0 +1,25 @@
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "fd98a258-2bd3-4abe-84dd-c694eb25d038",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": "{'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}",
+    "json": null,
+    "method": "GET",
+    "params": null,
+    "service": "api"
+}
+curl -X GET -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'User-Agent: python-requests/2.32.3' http://5.63.153.31:5051/v1/account
+{
+    "event": "Response",
+    "event_id": "fd98a258-2bd3-4abe-84dd-c694eb25d038",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:53:30 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "status": 401,
+        "title": "User must be authenticated",
+        "traceId": "00-aef599b18534936f052b03656c9089c3-7d9882fd649a74b7-01",
+        "type": "https://tools.ietf.org/html/rfc7235#section-3.1"
+    },
+    "service": "api",
+    "status_code": 401
+}

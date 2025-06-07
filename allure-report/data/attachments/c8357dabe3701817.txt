@@ -1,0 +1,37 @@
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "618659ec-7746-4d06-bf7f-e924e9d04630",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "ek-n-pavlovamail.ru",
+        "login": "ek-n-pavlova",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 82' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "ek-n-pavlova", "password": "123456789", "email": "ek-n-pavlovamail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "event": "Response",
+    "event_id": "618659ec-7746-4d06-bf7f-e924e9d04630",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:37:52 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "errors": {
+            "Email": [
+                "Invalid"
+            ],
+            "Login": [
+                "Taken"
+            ]
+        },
+        "status": 400,
+        "title": "Validation failed",
+        "traceId": "00-149ebd6625dd302fa878ff9261eb759d-9677e77143155375-01",
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+    },
+    "service": "api",
+    "status_code": 400
+}

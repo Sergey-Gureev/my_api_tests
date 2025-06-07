@@ -6,6 +6,7 @@ import structlog
 import uuid
 
 from restclient.configuration import Configuration
+from restclient.utilities import allure_attach
 
 
 class RestClient:
@@ -32,6 +33,7 @@ class RestClient:
         if headers:
             self.session.headers.update(headers)
 
+    @allure_attach
     def _send_request(self, method, path, **kwargs):
         log = self.log.bind(event_id=str(uuid.uuid4()))
         full_url = self.host + path

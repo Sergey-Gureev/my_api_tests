@@ -1,0 +1,173 @@
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "7c94c061-74ec-4f07-86b5-bd426346bbe1",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "sgureev+1749308006@mail.ru",
+        "login": "sgureev+1749308006",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 95' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "sgureev+1749308006", "password": "123456789", "email": "sgureev+1749308006@mail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "event": "Response",
+    "event_id": "7c94c061-74ec-4f07-86b5-bd426346bbe1",
+    "headers": "{'Content-Length': '0', 'Date': 'Sat, 07 Jun 2025 14:53:26 GMT', 'Server': 'Kestrel', 'Location': 'http://5.63.153.31:5051/v1/users/sgureev%2B1749308006'}",
+    "json": {},
+    "service": "api",
+    "status_code": 201
+}
+subject: Добро пожаловать на
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "f3c748e1-1b1b-454d-a9ea-a33a87979ea6",
+    "full_url": "http://5.63.153.31:5051/v1/account/621ded91-c807-449b-b790-4c710889f9b1",
+    "headers": {
+        "accept": "text/plain"
+    },
+    "json": null,
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'accept: text/plain' http://5.63.153.31:5051/v1/account/621ded91-c807-449b-b790-4c710889f9b1
+{
+    "event": "Response",
+    "event_id": "f3c748e1-1b1b-454d-a9ea-a33a87979ea6",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:53:26 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "resource": {
+            "login": "sgureev+1749308006",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "8c7b2f2c-4f46-4386-bd5a-43bfe8297f44",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "sgureev+1749308006",
+        "password": "123456789",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 76' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "sgureev+1749308006", "password": "123456789", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "event": "Response",
+    "event_id": "8c7b2f2c-4f46-4386-bd5a-43bfe8297f44",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:53:27 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5A2wCIpLmplKckzjeYyYJf9pwq91DiB13gMsrto5e7dG7v+7hKMm7f+ubBOl6cGK0jnbO3iUWsv1s3cOIAiFeG4fu1973WI8AbEuflNliGDrlmHOl3ENbqJsbWzmqW9yaY='}",
+    "json": {
+        "resource": {
+            "login": "sgureev+1749308006",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-06-07T14:53:27.111556+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "b5de9db3-0e4f-4c6e-b1fa-b03b6b39efca",
+    "full_url": "http://5.63.153.31:5051/v1/account/email",
+    "headers": null,
+    "json": {
+        "email": "changed.sgureev+1749308006@mail.ru",
+        "login": "sgureev+1749308006",
+        "password": "123456789"
+    },
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 103' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -H 'X-Dm-Auth-Token: IQJh+zgzF5A2wCIpLmplKckzjeYyYJf9pwq91DiB13gMsrto5e7dG7v+7hKMm7f+ubBOl6cGK0jnbO3iUWsv1s3cOIAiFeG4fu1973WI8AbEuflNliGDrlmHOl3ENbqJsbWzmqW9yaY=' -d '{"login": "sgureev+1749308006", "password": "123456789", "email": "changed.sgureev+1749308006@mail.ru"}' http://5.63.153.31:5051/v1/account/email
+{
+    "event": "Response",
+    "event_id": "b5de9db3-0e4f-4c6e-b1fa-b03b6b39efca",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:53:27 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5A2wCIpLmplKckzjeYyYJf9pwq91DiB13gMsrto5e7dG7v+7hKMm7f+ubBOl6cGK0jnbO3iUWsv1s3cOIAiFeG4fu1973WI8AbEuflNliGDrlmHOl3ENbqJsbWzmqW9yaY='}",
+    "json": {
+        "resource": {
+            "login": "sgureev+1749308006",
+            "online": "2025-06-07T14:53:28.170293+00:00",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+subject: Подтверждение смены адреса электронной почты на DM.AM для
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "232e259a-97f3-4031-8edf-f508321ea5bd",
+    "full_url": "http://5.63.153.31:5051/v1/account/b7c81dfa-941f-47e0-aa6c-b7c7d45e3b67",
+    "headers": {
+        "accept": "text/plain"
+    },
+    "json": null,
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'X-Dm-Auth-Token: IQJh+zgzF5A2wCIpLmplKckzjeYyYJf9pwq91DiB13gMsrto5e7dG7v+7hKMm7f+ubBOl6cGK0jnbO3iUWsv1s3cOIAiFeG4fu1973WI8AbEuflNliGDrlmHOl3ENbqJsbWzmqW9yaY=' -H 'accept: text/plain' http://5.63.153.31:5051/v1/account/b7c81dfa-941f-47e0-aa6c-b7c7d45e3b67
+{
+    "event": "Response",
+    "event_id": "232e259a-97f3-4031-8edf-f508321ea5bd",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:53:27 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5A2wCIpLmplKckzjeYyYJf9pwq91DiB13gMsrto5e7dG7v+7hKMm7f+ubBOl6cGK0jnbO3iUWsv1s3cOIAiFeG4fu1973WI8AbEuflNliGDrlmHOl3ENbqJsbWzmqW9yaY='}",
+    "json": {
+        "resource": {
+            "login": "sgureev+1749308006",
+            "online": "2025-06-07T14:53:28.170293+00:00",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}

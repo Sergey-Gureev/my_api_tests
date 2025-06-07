@@ -1,10 +1,13 @@
 from datetime import datetime
+
+import allure
 from assertpy import assert_that, soft_assertions
 from dm_api_account.models.user_envelope import UserRole
 
 class GetV1AccountChecker:
 
     @classmethod
+    @allure.step('check user fields in response')
     def check_user_params(cls,user_model_response, prepared_user):
         with soft_assertions():
             assert_that(user_model_response.resource.login).is_equal_to(prepared_user.login)
