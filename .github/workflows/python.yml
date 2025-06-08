@@ -67,7 +67,7 @@ jobs:
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v1.2.9
-      - run: echo https://github.io/Sergey-Gureev/my_api_tests
+#      - run: echo https://github.io/Sergey-Gureev/my_api_tests
 
 
 
