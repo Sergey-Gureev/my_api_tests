@@ -61,9 +61,9 @@ jobs:
     name: Publish report
     steps:
       - name: Download allure reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
       - name: Upload allure report
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v1.2.9
