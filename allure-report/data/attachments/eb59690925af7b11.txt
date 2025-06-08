@@ -1,0 +1,118 @@
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "62b52448-4dd0-46f7-b711-e93d64aed924",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "sgureev+1749305109@mail.ru",
+        "login": "sgureev+1749305109",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 95' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "sgureev+1749305109", "password": "123456789", "email": "sgureev+1749305109@mail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "event": "Response",
+    "event_id": "62b52448-4dd0-46f7-b711-e93d64aed924",
+    "headers": "{'Content-Length': '0', 'Date': 'Sat, 07 Jun 2025 14:05:09 GMT', 'Server': 'Kestrel', 'Location': 'http://5.63.153.31:5051/v1/users/sgureev%2B1749305109'}",
+    "json": {},
+    "service": "api",
+    "status_code": 201
+}
+subject: Добро пожаловать на
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "6b8d8d6b-4012-4965-afc8-6832032a4ec2",
+    "full_url": "http://5.63.153.31:5051/v1/account/49c16b98-498c-4cdc-a60e-fa01219830a6",
+    "headers": {
+        "accept": "text/plain"
+    },
+    "json": null,
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'accept: text/plain' http://5.63.153.31:5051/v1/account/49c16b98-498c-4cdc-a60e-fa01219830a6
+{
+    "event": "Response",
+    "event_id": "6b8d8d6b-4012-4965-afc8-6832032a4ec2",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:05:10 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "resource": {
+            "login": "sgureev+1749305109",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "d6a9ce0e-3440-403a-88e8-7b4c2fd4986e",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "sgureev+1749305109",
+        "password": "123456789",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 76' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "sgureev+1749305109", "password": "123456789", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "event": "Response",
+    "event_id": "d6a9ce0e-3440-403a-88e8-7b4c2fd4986e",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sat, 07 Jun 2025 14:05:10 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5Ag4qBUYxCNZIj1L/ypMcgoFupiQ6KjahmOaHq7xgqGmLsZm11yWiOnFm2QGHvjVMDcJd6GwPkddxI4Rq8Lte8oCCox9moubO9nBoR+0jO/2sR4VDXD6FCBq/TW/yBDJck='}",
+    "json": {
+        "resource": {
+            "login": "sgureev+1749305109",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-06-07T14:05:10.154373+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "event": "Request",
+    "event_id": "d775ed41-a274-4cbb-a8be-daca099424b0",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": null,
+    "method": "DELETE",
+    "params": null,
+    "service": "api"
+}
+curl -X DELETE -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'X-Dm-Auth-Token: IQJh+zgzF5Ag4qBUYxCNZIj1L/ypMcgoFupiQ6KjahmOaHq7xgqGmLsZm11yWiOnFm2QGHvjVMDcJd6GwPkddxI4Rq8Lte8oCCox9moubO9nBoR+0jO/2sR4VDXD6FCBq/TW/yBDJck=' http://5.63.153.31:5051/v1/account/login
+{
+    "event": "Response",
+    "event_id": "d775ed41-a274-4cbb-a8be-daca099424b0",
+    "headers": "{'Date': 'Sat, 07 Jun 2025 14:05:10 GMT', 'Server': 'Kestrel'}",
+    "json": {},
+    "service": "api",
+    "status_code": 204
+}

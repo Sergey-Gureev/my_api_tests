@@ -3,6 +3,8 @@ import time
 
 from email.header import decode_header
 
+import allure
+
 from dm_api_account.models.change_registered_user_email import ChangeUserEmail
 from dm_api_account.models.login_credentials import LoginCredentials
 from dm_api_account.models.registration import Registration
@@ -36,6 +38,7 @@ class AccountHelper:
         self.mailhog = mailhog
         self.token=None
 
+    @allure.step('auth user')
     def auth_client(self, login, password, remember_me=True, return_model=False ):
         response = self.user_login(login, password, remember_me, return_model=return_model)
         assert response.headers.get("x-dm-auth-token"), 'x-dm-auth-token were not returned'
@@ -45,6 +48,7 @@ class AccountHelper:
         self.dm_account_api.account_api.set_headers(x_dm_auth_token)
         self.dm_account_api.login_api.set_headers(x_dm_auth_token)
 
+    @allure.step('register new user')
     def register_new_user(self, login, email, password):
         registration_initialized_object = Registration(
             login=login,
@@ -55,6 +59,7 @@ class AccountHelper:
         # assert register_response.status_code in [200, 201]
         return register_response
 
+    @allure.step('activate registered user')
     def activate_registered_user(self,login):
         start_time = time.time()
         token = self.get_activation_token_by_login(login=login)
@@ -67,6 +72,7 @@ class AccountHelper:
         assert response.json()['resource']['rating']['enabled'] == True, "user not activated"
         return response
 
+    @allure.step('login user')
     def user_login(self, login, password, remember_me=True, return_model=False):
         login_credentials = LoginCredentials(
             login=login,
@@ -82,6 +88,7 @@ class AccountHelper:
         return response
 
     @retry(stop_max_attempt_number=4, retry_on_result=retry_if_result_none, wait_fixed=2000)
+    @allure.step('get activation token in mailhog')
     def get_activation_token_by_login(self, login, restore_password=False):
         token = None
         mailhog_response = self.mailhog.mail_api.get_api_v2_messages()
@@ -103,6 +110,7 @@ class AccountHelper:
         return token
         # assert token is not None, 'there is no email with your token'
 
+    @allure.step('change email')
     def change_email(self, login, password, new_email):
         change_users_email = ChangeUserEmail(login=login, password=password, email=new_email)
         self.dm_account_api.account_api.put_v1_account_email(change_users_email=change_users_email)
@@ -110,6 +118,7 @@ class AccountHelper:
         response = self.dm_account_api.account_api.put_v1_account_token(token=token)
         assert response.status_code == 200, "email has not been changed"
 
+    @allure.step('change password')
     def change_password(self,login,email, password, new_password):
         # initialize pydandic model user_reset_password
         user_reset_password = ResetUserPassword(
@@ -131,6 +140,7 @@ class AccountHelper:
         response = self.dm_account_api.account_api.put_v1_account_password(changes_users_password=user_change_password)
         assert response.status_code == 200, f"password has not been changed; response errors {response.get('errors')}"
 
+    @allure.step('delete auth user')
     def delete_auth_user(self, all_devices=False, **kwargs):
         if all_devices:
             response = self.dm_account_api.login_api.delete_v1_account_login_all(**kwargs)
