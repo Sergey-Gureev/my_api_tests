@@ -11,7 +11,7 @@ v.add_config_path(config)
 v.read_in_config()
 
 
-def send_file()-> None:
+def send_file() -> None:
     chat_id = v.get("telegram.chat_id")
     telegram_bot = TeleBot(v.get("telegram.token"))
     file_path = Path(__file__).parent.joinpath('../../').joinpath("swagger-coverage-dm-api-account.html")

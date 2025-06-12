@@ -29,9 +29,10 @@ jobs:
         continue-on-error: true
 
       - name: Run Coverage
-        if: ${{ always() }}
+        if: always()
         run: |
           python -m packages.notifier.bot
+        
 
       - name: Archive allure results
         uses: actions/upload-artifact@v4

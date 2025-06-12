@@ -33,7 +33,10 @@ options = (
     "telegram.chat_id",
     "telegram.token"
 )
-@pytest.fixture(autouse=True)
+
+
+
+@pytest.fixture(scope="session",autouse=True)
 def set_config(request):
     config = Path(__file__).joinpath("../../").joinpath("config")
     config_name = request.config.getoption("--env")
@@ -47,6 +50,13 @@ def set_config(request):
     request.config.stash['telegram-notifier-addfields']['environment'] = config_name
     request.config.stash['telegram-notifier-addfields']['report'] = "http://sergey-gureev.github.io/my_api_tests/"
 
+@pytest.fixture(scope="session", autouse=True)
+def setup_swagger_coverage():
+    reporter = CoverageReporter(api_name="dm-api-account", host="http://5.63.153.31:5051")
+    reporter.setup(path_to_swagger_json="/swagger/Account/swagger.json")
+    yield
+    reporter.generate_report()
+    reporter.cleanup_input_files()
 
 def pytest_addoption(parser):
     parser.addoption("--env", action="store", default="stg", help="run stg")
@@ -102,10 +112,4 @@ def prepared_user():
     user = User(login=login, password=password, email=email)
     return user
 
-@pytest.fixture(scope="session", autouse=True)
-def setup_swagger_coverage():
-    reporter = CoverageReporter(api_name="dm-api-account", host="http://5.63.153.31:5051")
-    reporter.cleanup_input_files()
-    reporter.setup(path_to_swagger_json="/swagger/Account/swagger.json")
 
-    yield reporter.generate_report()
