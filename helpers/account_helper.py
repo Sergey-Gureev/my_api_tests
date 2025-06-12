@@ -5,10 +5,10 @@ from email.header import decode_header
 
 import allure
 
-from dm_api_account.models.change_registered_user_email import ChangeUserEmail
-from dm_api_account.models.login_credentials import LoginCredentials
-from dm_api_account.models.registration import Registration
-from dm_api_account.models.reset_user_passwrord import ResetUserPassword, ChangeUserPassword
+from clients.http.dm_api_account.models.change_registered_user_email import ChangeUserEmail
+from clients.http.dm_api_account.models.login_credentials import LoginCredentials
+from clients.http.dm_api_account.models.registration import Registration
+from clients.http.dm_api_account.models.reset_user_passwrord import ResetUserPassword, ChangeUserPassword
 from services.dm_api_account import DMApiAccount
 from services.api_mailhog import MaiHogApi
 from retrying import retry

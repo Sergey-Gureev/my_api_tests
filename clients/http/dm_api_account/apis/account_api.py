@@ -1,9 +1,9 @@
-from dm_api_account.models.change_registered_user_email import ChangeUserEmail
-from dm_api_account.models.registration import Registration
-from dm_api_account.models.reset_user_passwrord import ResetUserPassword, ChangeUserPassword
-from dm_api_account.models.user_detail_envelope import UserDetailsEnvelope
-from dm_api_account.models.user_envelope import UserEnvelope
-from restclient.client import RestClient
+from clients.http.dm_api_account.models.change_registered_user_email import ChangeUserEmail
+from clients.http.dm_api_account.models.registration import Registration
+from clients.http.dm_api_account.models.reset_user_passwrord import ResetUserPassword, ChangeUserPassword
+from clients.http.dm_api_account.models.user_detail_envelope import UserDetailsEnvelope
+from clients.http.dm_api_account.models.user_envelope import UserEnvelope
+from packages.restclient.client import RestClient
 
 
 class AccountAPI(RestClient):
