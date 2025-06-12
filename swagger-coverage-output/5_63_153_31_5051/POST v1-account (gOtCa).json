@@ -1,0 +1,51 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Recorded Request"
+    },
+    "paths": {
+        "/v1/account": {
+            "POST": {
+                "parameters": [
+                    {
+                        "name": "uri_params",
+                        "in": "path",
+                        "required": false,
+                        "x-example": "None"
+                    }
+                ],
+                "responses": {
+                    "400": {}
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "login": {
+                                        "login": "ek-n-pavlova",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "password": "123456789",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "email": "ek-n-pavlovamail.ru",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "login": "ek-n-pavlova",
+                                "password": "123456789",
+                                "email": "ek-n-pavlovamail.ru"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
