@@ -25,7 +25,7 @@ jobs:
           distribution: 'adopt'
 
       - name: set JAVA_HOME
-        run: echo "JAVA_HOME=$(dirname $dirname $(readlink -f $(which java))))" >> GITHUB_ENV
+        run: echo "JAVA_HOME=$(dirname $dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: |
