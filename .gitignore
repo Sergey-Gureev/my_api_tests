@@ -176,3 +176,5 @@ cython_debug/
 # Allure reports
 allure-report
 allure-results
+swagger-coverage-report-dm-api-account.html
+swagger-coverage-output
