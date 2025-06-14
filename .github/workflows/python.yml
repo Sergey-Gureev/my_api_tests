@@ -40,7 +40,7 @@ jobs:
       - name: Run Coverage
         run: |
           echo "i was here"
-          echo "ls"
+          echo $(ls)
           python -m packages.notifier.bot
       - name: Archive allure results
         uses: actions/upload-artifact@v4
