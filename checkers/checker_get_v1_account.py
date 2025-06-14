@@ -2,7 +2,7 @@ from datetime import datetime
 
 import allure
 from assertpy import assert_that, soft_assertions
-from dm_api_account.models.user_envelope import UserRole
+from clients.http.dm_api_account.models.user_envelope import UserRole
 
 class GetV1AccountChecker:
 
