@@ -5,3 +5,7 @@ service:
 user:
   login: "sgureev"
   password: "123456789"
+
+telegram:
+  chat_id: "569630204"
+  token: "5040350892:AAEHYkqI8PPGykLNpbSw4onA428bbAj4y2c"

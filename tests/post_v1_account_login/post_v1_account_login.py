@@ -1,6 +1,6 @@
 
-from hamcrest import assert_that, has_property, equal_to, has_items, contains
-from dm_api_account.models.user_envelope import UserRole
+from hamcrest import assert_that, has_property, equal_to, has_items
+from clients.http.dm_api_account.models.user_envelope import UserRole
 
 
 def test_post_v1_account_login_positive_flow(registered_user, account_helper):
