@@ -70,7 +70,6 @@ sortedcontainers==2.4.0
 starlette==0.46.2
 starlette-testclient==0.4.1
 structlog==25.3.0
-swagger-coverage @ https://github.com/ValeriyMenshikov/swagger-coverage-py/archive/refs/heads/master.zip#sha256=0af6068fc39f4ea9495973ed030f7c473a55f0f49fecacf6115d2ffd14910b78
 telebot==0.0.5
 toml==0.10.2
 tomli==2.2.1
